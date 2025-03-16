@@ -1,1 +1,2 @@
-pip install streamlit ultralytics supervision opencv-python pillow torch torchvision numpy
+!pip install streamlit ultralytics supervision opencv-python pillow torch torchvision numpy
+!pip install opencv-python-headless
