@@ -1,25 +1,28 @@
 import streamlit as st
 import numpy as np
-from PIL import Image
-from ultralytics import YOLOE
 import supervision as sv
+from PIL import Image
 
 # Ensure OpenCV is properly imported
 try:
     import cv2
 except ImportError:
-    st.error("OpenCV (cv2) is not installed. Please install it using 'pip install opencv-python-headless'.")
+    st.error("OpenCV (cv2) is not installed. Run 'pip install opencv-python-headless'.")
+    st.stop()
 
-# Load YOLOE model
-@st.cache_resource
-def load_model():
-    model = YOLOE("yoloe-v8l-seg.pt").cuda()  # Use GPU if available
-    return model
+# Ensure Ultralytics is properly imported
+try:
+    from ultralytics import YOLO
+except ImportError:
+    st.error("Ultralytics is not installed correctly. Run 'pip install ultralytics'.")
+    st.stop()
 
+# Load YOLOE model from model_loader.py
+from model_loader import load_model
 model = load_model()
 
 # Streamlit UI
-st.title("YOLOE Object Detection Dashboard 🖼️🚀")
+st.title("YOLOE Object Detection Dashboard 🚀")
 st.write("Upload an image to detect objects using YOLOE-V8L-SEG.")
 
 # Upload image
